@@ -1,8 +1,11 @@
 # UriSignature
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/uri_signature`. To experiment with that code, run `bin/console` for an interactive prompt.
+A general purpose way of signing a URL when you need the signature to be added
+to the URL. This is useful when you need to redirect a user from one service to
+another and communicate information without any risk of tampering. It's based
+on a shared secret and HMAC being used to sign the URL.
 
-TODO: Delete this and the text above, and describe your gem
+This could be used in techniques described in http://broadcast.oreilly.com/2009/12/principles-for-standardized-rest-authentication.html
 
 ## Installation
 
@@ -22,13 +25,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+pry(main)> require 'uri_signature'
 
-## Development
+pry(main)> signed_uri = URISignature.sign("http://foobar.com?my_trusted_information=helloworld", expiry: 300, key: "my_shared_secret_key").to_s
+=> "http://foobar.com?my_trusted_information=helloworld&signature=b99f3d00610361be49327938b82802c933aa4fac&signature_expires=1444691758"
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+pry(main)> URISignature.valid?(signed_uri, key: "my_shared_secret_key")
+=> true
+```
 
 ## Contributing
 
