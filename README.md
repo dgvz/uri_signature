@@ -37,5 +37,5 @@ pry(main)> URISignature.valid?(signed_uri, key: "my_shared_secret_key")
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/uri_signature.
+Bug reports and pull requests are welcome on GitHub at https://github.com/dgvz/uri_signature.
 
