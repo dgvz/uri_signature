@@ -28,7 +28,7 @@ Or install it yourself as:
 ```ruby
 pry(main)> require 'uri_signature'
 
-pry(main)> signed_uri = URISignature.sign("http://foobar.com?my_trusted_information=helloworld", expiry: 300, key: "my_shared_secret_key").to_s
+pry(main)> signed_uri = URISignature.sign("http://foobar.com?my_trusted_information=helloworld", expiry: 300, key: "my_shared_secret_key")
 => "http://foobar.com?my_trusted_information=helloworld&signature=b99f3d00610361be49327938b82802c933aa4fac&signature_expires=1444691758"
 
 pry(main)> URISignature.valid?(signed_uri, key: "my_shared_secret_key")
